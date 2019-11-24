@@ -1,0 +1,21 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<h3>Transfer completed</h3>
+{% if user.is_authenticated %}
+<div>
+    <ul id="transfer-details">
+        <li>Recipient: {{ recipient_name }}</li>
+        <li>Recipient's account number: {{ recipient_account }}</li>
+        <li>Transfer title: {{ title }}</li>
+        <li>Transfer amount: {{ amount }} PLN</li>
+    </ul>
+    <a href="/dashboard"> OK </a>
+</div>
+{% else %}
+<div class="article">
+    <h4>User not logged in</h4>
+    <p>Please log in</p>
+</div>
+{% endif %}
+{% endblock %}>
