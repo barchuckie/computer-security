@@ -1,0 +1,32 @@
+{% extends 'header.html' %}
+{% block content %}
+    <span><a href="new_transfer" class="btn btn-primary">New transfer</a> </span>
+    <span><a href="accounts/logout" class="btn btn-secondary">Logout</a> </span>
+    <h2>
+        Your transaction history
+    </h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Sender</th>
+            <th scope="col">Recipient</th>
+            <th scope="col">Recipient Account No.</th>
+            <th scope="col">Title</th>
+            <th scope="col">Date</th>
+            <th scope="col">Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.sender.username }}</td>
+                <td>{{ transaction.recipient_name }}</td>
+                <td>{{ transaction.recipient_account }}</td>
+                <td>{{ transaction.title }}</td>
+                <td>{{ transaction.date }}</td>
+                <td>{{ transaction.amount }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
