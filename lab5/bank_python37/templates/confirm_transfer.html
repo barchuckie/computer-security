@@ -3,7 +3,7 @@
 {% block content %}
 <h3>Confirm transfer details</h3>
 {% if user.is_authenticated %}
-<form action="/confirm_transfer" method="post">
+<form id="confirm-form" action="/confirm_transfer" method="post">
     {% csrf_token %}
     <div>
         <ul id="transfer-details">
