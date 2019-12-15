@@ -1,0 +1,41 @@
+HTTP/1.1 200 OK
+Date: Sun, 15 Dec 2019 00:35:36 GMT
+Server: WSGIServer/0.2 CPython/3.7.5
+Content-Type: text/html; charset=utf-8
+Expires: Sun, 15 Dec 2019 00:35:36 GMT
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+Vary: Cookie
+X-Frame-Options: SAMEORIGIN
+Content-Length: 1267
+Set-Cookie: csrftoken=CwjkAhbiYSWYL2JGd4JyOuU9uH6CMCvsdHiPV8UtghfgS4lyg1MGNRt1oGsD0IQB; expires=Sun, 13 Dec 2020 00:35:36 GMT; Max-Age=31449600; Path=/; SameSite=Lax
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/static/styles.css"/> -->
+    <title>  Barchuck Bank </title>
+</head>
+<body>
+<div class="container">
+    <header class="main-header">
+        <h1> BARCHUCK BANK </h1>
+    </header>
+    <div>
+        
+    <form method="POST">
+        <input type="hidden" name="csrfmiddlewaretoken" value="HB606SYaB913kS49sUe078yDCLbGXVGaiM5vrJHlTyklrUG1vRh86v7vwKxHb11j">
+        <p><label for="id_username">Username:</label> <input type="text" name="username" autofocus required id="id_username"></p>
+<p><label for="id_password">Password:</label> <input type="password" name="password" required id="id_password"></p>
+        <button type="submit" class="btn btn-primary">Log in</button>
+        <span><a href="/" class="btn btn-secondary">Back</a></span>
+        <span><a href="/accounts/password_reset">Forgot your password?</a></span>
+    </form>
+
+    </div>
+  </div>
+</body>
+</html>
