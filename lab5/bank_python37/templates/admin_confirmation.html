@@ -1,14 +1,11 @@
 {% extends 'header.html' %}
 {% block content %}
-    <span><a href="new_transfer" class="btn btn-primary">New transfer</a> </span>
-    <span><a href="accounts/logout" class="btn btn-secondary">Logout</a> </span>
-    {%  if user.is_superuser %}
-        <span><a href="admin/all_transfers" class="btn btn-primary">All transfers</a> </span>
-        <span><a href="admin/confirm" class="btn btn-primary">Confirm transfers</a> </span>
-    {% endif %}
     <h2>
-        Your transaction history
+        All transfers
     </h2>
+    <span><a href="/" class="btn btn-primary">Dashboard</a></span>
+    {% autoescape off %}
+    <form method="post" action="confirm">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -18,6 +15,7 @@
             <th scope="col">Title</th>
             <th scope="col">Date</th>
             <th scope="col">Amount</th>
+            <th scope="col">Confirmed</th>
         </tr>
         </thead>
         <tbody>
@@ -29,8 +27,13 @@
                 <td>{{ transfer.title }}</td>
                 <td>{{ transfer.date }}</td>
                 <td>{{ transfer.amount }}</td>
+                <td><input name="{{ transfer.id }}" id="{{ transfer.id }}" type="checkbox"></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% endautoescape %}
+    <span><a href="all_transfers" class="btn btn-primary">All transfers</a> </span>
 {% endblock %}

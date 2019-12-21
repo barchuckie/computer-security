@@ -1,0 +1,15 @@
+{% extends 'header.html' %}
+{% block content %}
+    <h3> Search for transfer </h3>
+    <form method="post">
+        {{ form.as_p }}
+    </form>
+
+    <table>
+        {% for record in response  %}
+            <tr>
+                {{ record }}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -11,6 +11,7 @@ class Transfer(models.Model):
     sender = models.ForeignKey(User, editable=False, on_delete=models.PROTECT)
     recipient_name = models.CharField(max_length=80, blank=False, null=False)
     recipient_account = models.CharField(validators=[IBAN_validator], null=False, max_length=26)
-    title = models.CharField(max_length=60, blank=False, null=False)
+    title = models.CharField(max_length=512, blank=False, null=False)
     amount = models.DecimalField(max_digits=22, decimal_places=2)
     date = models.DateField(auto_now_add=True)
+    confirmed = models.BooleanField(default=False)

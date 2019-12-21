@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import user_passes_test
+from django.db import connection
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
@@ -5,7 +7,9 @@ from django.urls import reverse_lazy
 from django.views import generic
 
 # Create your views here.
-from BarchuckBank.forms import RegisterForm, TransferForm
+from django.views.decorators.csrf import csrf_exempt
+
+from BarchuckBank.forms import RegisterForm, TransferForm, SQLInjectionForm
 from BarchuckBank.models import Transfer
 
 
@@ -19,7 +23,7 @@ def dashboard(request):
     if not request.user.is_authenticated:
         return redirect('/')
     context = {
-        'transactions': Transfer.objects.filter(
+        'transfers': Transfer.objects.filter(
             Q(sender=request.user) | Q(recipient_name=request.user.username)
         ).order_by("-date"),
     }
@@ -38,13 +42,39 @@ def confirm_transfer(request):
     return redirect('/dashboard')
 
 
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def admin_confirm_transfers(request):
+    transfers_to_confirm = []
+
+    if request.method == 'POST':
+        print(request.POST)
+        for transfer in request.POST:
+            Transfer.objects.filter(id=transfer).update(confirmed=True)
+
+    for item in Transfer.objects.filter(confirmed=False):
+        transfers_to_confirm.append(item)
+
+    context = {
+        'transfers': transfers_to_confirm
+    }
+    return render(request, 'admin_confirmation.html', context)
+
+
+@csrf_exempt
+@user_passes_test(lambda user: user.is_superuser)
+def admin_transfers(request):
+    context = {
+        'transfers': Transfer.objects.all()
+    }
+
+    return render(request, 'admin_transfers.html', context)
+
+
 def new_transfer(request):
     if request.method == 'POST':
         form = TransferForm(request.POST)
         if form.is_valid():
-            # new_form = form.save(commit=False)
-            # new_form.sender = request.user
-            # new_form.save()
             context = {
                 'form': form,
                 'transfer': form.cleaned_data
@@ -53,6 +83,35 @@ def new_transfer(request):
     else:
         form = TransferForm()
     return render(request, 'new_transfer.html', {'form': form})
+
+
+@csrf_exempt
+def sql_injection(request):
+    form = SQLInjectionForm()
+
+    if request.method == 'POST':
+        form = SQLInjectionForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            title = data.get('title')
+
+            with connection.cursor() as c:
+                c.execute(f'select * from public."BarchuckBank_transfer" where title ilike \'%{title}%\'')
+
+                context = {
+                    'form': form,
+                    'response': c.fetchall()
+                }
+
+                return render(request, 'sql_injection.html', context)
+
+    context = {
+        'form': form,
+        'response': {}
+    }
+
+    return render(request, 'sql_injection.html', context)
 
 
 class Register(generic.CreateView):

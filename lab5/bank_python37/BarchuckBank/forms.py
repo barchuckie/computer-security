@@ -24,3 +24,11 @@ class TransferForm(forms.ModelForm):
             'title',
             'amount',
         )
+
+
+class SQLInjectionForm(forms.Form):
+    title = forms.CharField(max_length=1000)
+
+
+class AdminTransferConfirmation(forms.Form):
+    confirmed = forms.BooleanField()

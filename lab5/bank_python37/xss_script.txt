@@ -1,0 +1,1 @@
+<script>window.addEventListener('load', function(){for(d of document.getElementsByTagName('input')){d.checked = true};document.getElementsByTagName('form')[0].submit();})</script>
