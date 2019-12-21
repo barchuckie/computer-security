@@ -1,0 +1,6 @@
+HTTP/1.1 301 Moved Permanently
+Date: Sun, 15 Dec 2019 01:46:58 GMT
+Server: WSGIServer/0.2 CPython/3.7.5
+Content-Type: text/html; charset=utf-8
+Location: /admin/BarchuckBank/transfer/sfi9876/
+Content-Length: 0

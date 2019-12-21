@@ -1,0 +1,10 @@
+GET /static/admin/css/base.css/ HTTP/1.1
+Host: 127.0.0.1:8000
+Accept-Encoding: gzip
+Connection: keep-alive
+User-Agent: Mozilla/5.0 SF/2.10b
+Range: bytes=0-399999
+Referer: http://127.0.0.1/
+Authorization: Basic a2FsaTprYWxpcm9vdA==
+Cookie: csrftoken=2PhFNn0MkBgXrjoS2eB4uwpPriRDiPsDcny0Z5Pq89gUUzzQXqXOmRtHgUYCrP6o
+
