@@ -1,6 +1,6 @@
 argon2-cffi==19.2.0
 cffi==1.13.2
-Django==2.2.10
+Django==2.2.22
 psycopg2==2.8.4
 pycparser==2.19
 pytz==2019.3
